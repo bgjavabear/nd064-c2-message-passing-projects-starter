@@ -1,4 +1,4 @@
-from app.connection_service.models import Location, Person
+from app.config.models import Location, Person
 from marshmallow import Schema, fields
 
 

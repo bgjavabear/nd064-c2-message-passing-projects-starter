@@ -4,8 +4,6 @@ from sqlalchemy import create_engine
 import os
 from app.config.config import config_by_name
 
-# Retrieve config parameters
-
 # Initialize database access
 
 config = config_by_name[os.getenv("FLASK_ENV") or "test"]

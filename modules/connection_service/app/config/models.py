@@ -3,15 +3,17 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 
-from app import db  # noqa
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
 from shapely.geometry.point import Point
 from sqlalchemy import BigInteger, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.ext.declarative import declarative_base
+
+BaseModel = declarative_base()
 
 
-class Person(db.Model):
+class Person(BaseModel):
     __tablename__ = "person"
 
     id = Column(Integer, primary_key=True)
@@ -20,7 +22,7 @@ class Person(db.Model):
     company_name = Column(String, nullable=False)
 
 
-class Location(db.Model):
+class Location(BaseModel):
     __tablename__ = "location"
 
     id = Column(BigInteger, primary_key=True)
