@@ -123,3 +123,9 @@ app/app-test.db
 
 .vagrant
 .ds_store
+
+*.iml
+modules/connection_service/connection_service_env
+modules/control_service/control_service_env
+modules/person_service/person_service_env
+modules/location_service/location_service_env

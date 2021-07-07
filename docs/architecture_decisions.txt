@@ -1,45 +1,31 @@
-1) Location Service
+1) person_service
 
-Location Service is responsible for creating locations and retrieving them from the database.
+person_service is responsible for 2 tasks:
+    1.1) Creating new users
+    1.2) Retrieving users
 
-Unlike persons that are created only once, locations are created all the time. The traffic may be huge.
+person_service is responsible for both of them, because it is easier to implement caching mechanism.
 
-That's why I chose kafka to effectively receive and store a huge volume of data.
+As soon as a new person is created and inserted into the database, we refresh the cache.
 
-For example:
-Let's consider a conference that thousands of people are willing to attend.
-The conference opens at 10PM. In worst case scenario we should expect thousands of simultaneous requests to our service.
+We need high-speed communication channel here, because the application requires us to load all users at once into the UI.
+The number of users may be huge. That's why I chose gRPC communication here.
 
-In the future if we want to improve our searching algorithm (the algorithm we use in connection_service),
-we may add additional logic to the method that is responsible for saving locations into the database.
-It will increase request processing time. That's why I think that kafka is a good choice for this particular service.
+2) location_service
 
+We expect locations are created frequently. There can be multiple locations for one user and even at the same day.
 
-Also I use REST to send messages to kafka and other test purposes.
+That's why I am using kafka. Location events will be stored into kafka broker and location_service will be retrieving
+data from it and store into the database.
 
-________________________________________________________________________________________________________________________
+I made it flask application, because we don't need to transfer huge volume of data.
+(search location by id, and creating a new location using api).
 
-2) Person Service is responsible for creating persons and retrieving them from the database.
+3) connection_service
+connection service is responsible for the algorithm of finding people that you may find intreresting.
 
-Person Service uses gRPC and REST.
+I chose grpc communication because the number of people returned may be huge.
 
-gRPC
-I use gRPC to retrieve the list of persons, a specific person and to send a person details to insert a new person into
-the database.
-
-REST
-I use REST for testing purposes to call controller methods using API.
-
-________________________________________________________________________________________________________________________
-
-3) Connection Service
-
-Connection Service contains the main logic. In the future the microservice could be extended to improve the search
-performance.
-
-gRPC
-gRPC is used to send to frontend all connections.
-There could be a lot of them, that's why using gRPC makes sense.
-
-
-
+4) control_service
+control_service is basically service for internal usage that allow us to publish messages to kafka, to gRPC servers, etc
+It is used for debugging or demonstration purposes only.
