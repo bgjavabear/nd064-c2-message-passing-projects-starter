@@ -11,5 +11,4 @@ engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 
 
 def find_all():
-    with Session(engine) as session:
-        return session.query(Person).all()
+    return Session(engine).query(Person).all()

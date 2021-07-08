@@ -30,14 +30,12 @@ def find_all(person_id, start_date, end_date):
     :param end_date: end date
     :return: locations with the specified column values
     """
-    with Session(engine) as session:
-        return session.session.query(Location) \
-            .filter(Location.person_id == person_id) \
-            .filter(Location.creation_time < end_date) \
-            .filter(Location.creation_time >= start_date) \
-            .all()
+    return Session(engine).query(Location) \
+        .filter(Location.person_id == person_id) \
+        .filter(Location.creation_time < end_date) \
+        .filter(Location.creation_time >= start_date) \
+        .all()
 
 
 def find_all_by_person_location_data(person_location_data):
-    with Session as session:
-        return session.execute(FIND_PEOPLE_NEARBY_QUERY, **person_location_data)
+    return Session(engine).execute(FIND_PEOPLE_NEARBY_QUERY, person_location_data)

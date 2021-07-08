@@ -19,5 +19,10 @@ def get_all():
 
 
 def create(person_data):
-    person_data_lol = person_data
-    return None
+    person_message = person_pb2.PersonMessage(
+        first_name=person_data['first_name'],
+        last_name=person_data['last_name'],
+        company_name=person_data['company_name']
+    )
+    new_person_message = person_stub.Create(person_message)
+    return new_person_message

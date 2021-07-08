@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "PersonMessage.proto";
 
 message LocationMessage {
   int32 id = 1;
@@ -6,13 +7,6 @@ message LocationMessage {
   string longitude = 3;
   string latitude = 4;
   string creation_time = 5;
-}
-
-message PersonMessage {
-  int32 id = 1;
-  string first_name = 2;
-  string last_name = 3;
-  string company_name = 4;
 }
 
 message ConnectionMessage {

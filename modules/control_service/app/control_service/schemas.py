@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields
 from ConnectionMessage_pb2 import ConnectionMessage
 from PersonMessage_pb2 import PersonMessage
+from ConnectionMessage_pb2 import LocationMessage
 
 
 class PersonSchema(Schema):
@@ -13,6 +14,17 @@ class PersonSchema(Schema):
         model = PersonMessage
 
 
-class ConnectionSchema(Schema):
+class LocationSchema(Schema):
+    id = fields.Integer()
+    person_id = fields.Integer()
+    longitude = fields.String(attribute="longitude")
+    latitude = fields.String(attribute="latitude")
+    creation_time = fields.String(attribute="creation_time")
+
     class Meta:
-        model = ConnectionMessage
+        model = LocationMessage
+
+
+class ConnectionSchema(Schema):
+    location = fields.Nested(LocationSchema)
+    person = fields.Nested(PersonSchema)
