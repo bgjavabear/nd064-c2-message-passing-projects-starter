@@ -1,7 +1,6 @@
 from marshmallow import Schema, fields
-from ConnectionMessage_pb2 import ConnectionMessage
-from PersonMessage_pb2 import PersonMessage
 from ConnectionMessage_pb2 import LocationMessage
+from PersonMessage_pb2 import PersonMessage
 
 
 class PersonSchema(Schema):
