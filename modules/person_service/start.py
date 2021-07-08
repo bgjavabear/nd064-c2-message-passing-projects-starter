@@ -11,10 +11,10 @@ logger = logging.getLogger("person_service")
 
 
 def serve():
-    logging.log(logging.INFO, 'gRPC server starting on port 5000.')
+    logging.log(logging.INFO, 'gRPC server starting on port 5005.')
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
     person_pb2_grpc.add_PersonServiceServicer_to_server(PersonServiceServicer(), server)
-    server.add_insecure_port("[::]:5000")
+    server.add_insecure_port("[::]:5005")
     server.start()
     logging.log(logging.INFO, 'gRPC server successfully started.')
     server.wait_for_termination()
@@ -22,4 +22,3 @@ def serve():
 
 if __name__ == "__main__":
     serve()
-
