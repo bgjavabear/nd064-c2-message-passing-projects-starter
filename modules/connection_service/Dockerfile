@@ -1,6 +1,6 @@
 FROM python:3.8
 
-WORKDIR /opt/connection_service
+WORKDIR /opt/connection-service
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt

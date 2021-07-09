@@ -1,0 +1,7 @@
+Dockerfile
+*.iml
+person_service_env
+PersonMessage_pb2_grpc.py
+PersonMessage_pb2.py
+.dockerignore
+__pycache__
