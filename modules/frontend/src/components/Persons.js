@@ -1,11 +1,5 @@
 import React, {Component} from "react";
 import Connection from "./Connection";
-import * as protoLoader from "@grpc/proto-loader";
-import * as grpc from "grpc";
-
-// const personPackageDef = protoLoader.loadSync("proto/PersonMessage.proto", {})
-// const personGrpc = grpc.loadPackageDefinition(personPackageDef)
-// const personClient = new personGrpc.PersonService("localhost:30005", grpc.credentials.createInsecure())
 
 class Persons extends Component {
     constructor(props) {
@@ -19,10 +13,6 @@ class Persons extends Component {
     }
 
     componentDidMount() {
-        //retrieve persons from grpc server
-        // personClient.RetrieveAll({}, (err, response) => {
-        //     console.log(response)
-        // })
         fetch(this.endpoint_url)
             .then((response) => response.json())
             .then((data) => this.setState({persons: data}));
