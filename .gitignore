@@ -135,3 +135,6 @@ app/app-test.db
 
 **/PersonMessage_pb2.py
 **/PersonMessage_pb2_grpc.py
+
+**/yarn.lock
+/modules/frontend/node_modules/
