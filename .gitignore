@@ -125,7 +125,13 @@ app/app-test.db
 .ds_store
 
 *.iml
-modules/connection_service/connection_service_env
-modules/control_service/control_service_env
-modules/person_service/person_service_env
-modules/location_service/location_service_env
+**/connection_service_env
+**/control_service_env
+**/person_service_env
+**/location_service_env
+
+**/ConnectionMessage_pb2.py
+**/ConnectionMessage_pb2_grpc.py
+
+**/PersonMessage_pb2.py
+**/PersonMessage_pb2_grpc.py
