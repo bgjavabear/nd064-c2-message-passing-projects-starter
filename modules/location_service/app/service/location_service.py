@@ -1,2 +1,5 @@
+from app.repository.location_repository import create
+
+
 def create_location(location_data):
-    return None
+    return create(location_data)
