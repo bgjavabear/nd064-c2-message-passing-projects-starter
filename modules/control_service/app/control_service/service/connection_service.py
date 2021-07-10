@@ -2,7 +2,7 @@ import grpc
 import ConnectionMessage_pb2_grpc as connection_pb2_grpc
 import ConnectionMessage_pb2 as connection_pb2
 
-connection_channel = grpc.insecure_channel("localhost:5006")
+connection_channel = grpc.insecure_channel("connection-service:5006")
 connection_stub = connection_pb2_grpc.ConnectionServiceStub(connection_channel)
 
 

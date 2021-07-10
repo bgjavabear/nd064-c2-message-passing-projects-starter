@@ -2,7 +2,7 @@ import grpc
 import PersonMessage_pb2 as person_pb2
 import PersonMessage_pb2_grpc as person_pb2_grpc
 
-person_channel = grpc.insecure_channel("localhost:5005")
+person_channel = grpc.insecure_channel("person-service:5005")
 person_stub = person_pb2_grpc.PersonServiceStub(person_channel)
 
 

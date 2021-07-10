@@ -18,12 +18,19 @@ def create(person):
     session = Session(engine)
     session.add(new_person)
     session.commit()
+    session.close()
     return new_person
 
 
 def find_by_id(person_id):
-    return Session(engine).query(Person).get(person_id)
+    session = Session(engine)
+    person = session.query(Person).get(person_id)
+    session.close()
+    return person
 
 
 def find_all():
-    return Session(engine).query(Person).all()
+    session = Session(engine)
+    persons = session.query(Person).all()
+    session.close()
+    return persons

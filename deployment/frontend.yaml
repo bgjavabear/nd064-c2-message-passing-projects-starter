@@ -34,17 +34,6 @@ spec:
         - image: agvaeducation/frontend:latest
           name: udaconnect-app
           imagePullPolicy: Always
-          env:
-            - name: ALL_PERSON_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: api-env
-                  key: ALL_PERSON_URL
-            - name: CONNECTION_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: api-env
-                  key: CONNECTION_URL
           resources:
             requests:
               memory: "128Mi"
