@@ -4,7 +4,8 @@ from flask_restx import Namespace, Resource
 
 import app.control_service.service.person_service as person_service
 import app.control_service.service.connection_service as connection_service
-from app.control_service.schemas import PersonSchema, ConnectionSchema
+import app.control_service.service.location_service as location_service
+from app.control_service.schemas import PersonSchema, ConnectionSchema, LocationSchema
 
 api = Namespace("Control Service", description="Central Service to control all microservices.")
 
@@ -48,3 +49,13 @@ class ConnectionDataResource(Resource):
         }
         connection_list = connection_service.get_connections(connection_request_data)
         return connection_list.connections
+
+
+@api.route("/locations")
+class LocationResource(Resource):
+    @accepts(schema=LocationSchema)
+    @responds(schema=LocationSchema)
+    def post(self):
+        payload = request.get_json()
+        location_service.send_location(payload)
+        return payload
