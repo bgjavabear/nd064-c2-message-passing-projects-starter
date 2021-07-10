@@ -18,8 +18,7 @@ We expect locations are created frequently. There can be multiple locations for 
 That's why I am using kafka. Location events will be stored into kafka broker and location_service will be retrieving
 data from it and store into the database.
 
-I made it flask application, because we don't need to transfer huge volume of data.
-(search location by id, and creating a new location using api).
+
 
 3) connection_service
 connection service is responsible for the algorithm of finding people that you may find intreresting.

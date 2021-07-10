@@ -1,0 +1,14 @@
+control-service has a full access to other microservices.
+
+You can access gRPC servers through control-service api.
+
+For example:
+GET http://localhost:30001/api/persons
+GET http://localhost:30001/api/persons/5
+
+POST http://localhost:30001/api/persons
+{
+    "first_name": "example_name",
+    "last_name": "example_last_name",
+    "company_name": "example_company"
+}
