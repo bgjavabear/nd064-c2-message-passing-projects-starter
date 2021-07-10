@@ -12,10 +12,10 @@ class PersonServicer(PersonServiceServicer):
         }
         new_person = create(person)
         return PersonMessage(
-            first_name=new_person.first_name,
-            last_name=new_person.last_name,
-            company_name=new_person.company_name,
-            id=new_person.id
+            first_name=new_person["first_name"],
+            last_name=new_person["last_name"],
+            company_name=new_person["company_name"],
+            id=new_person["id"]
         )
 
     def Retrieve(self, request, context):

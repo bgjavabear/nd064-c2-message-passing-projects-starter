@@ -7,7 +7,7 @@ import PersonMessage_pb2_grpc as person_pb2_grpc
 from app.service.grpc_service import PersonServicer
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("person_service")
+logger = logging.getLogger("person-service")
 
 
 def serve():

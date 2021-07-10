@@ -34,9 +34,9 @@ def serve():
     logger.log(logging.INFO, 'Begin initialization.')
     consumer = get_kafka_conn_object()
     for message in consumer:
-        logger.info(logging.INFO, 'Received a new location={}.'.format(message.value))
+        logger.log(logging.INFO, 'Received a new location={}.'.format(message.value))
         create_location(message.value)
-    logging.log(logging.INFO, 'Kafka Consumer has been successfully started.')
+    logger.log(logging.INFO, 'Kafka Consumer has been successfully started.')
 
 
 if __name__ == "__main__":

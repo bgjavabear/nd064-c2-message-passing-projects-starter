@@ -17,9 +17,16 @@ def create(person):
     new_person.last_name = person["last_name"]
     new_person.company_name = person["company_name"]
     session.add(new_person)
+    new_person_data = {
+        "id": new_person.id,
+        "first_name": new_person.first_name,
+        "last_name": new_person.last_name,
+        "company_name": new_person.company_name
+    }
+
     session.commit()
     session.close()
-    return new_person
+    return new_person_data
 
 
 def find_by_id(person_id):
