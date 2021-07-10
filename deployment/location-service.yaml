@@ -5,6 +5,10 @@ metadata:
     service: location-service
   name: location-service
 spec:
+  ports:
+    - name: "5003"
+      port: 5003
+      targetPort: 5003
   selector:
     service: location-service
   type: ClusterIP

@@ -11,11 +11,11 @@ engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 
 
 def create(person):
+    session = Session(engine)
     new_person = Person()
     new_person.first_name = person["first_name"]
     new_person.last_name = person["last_name"]
     new_person.company_name = person["company_name"]
-    session = Session(engine)
     session.add(new_person)
     session.commit()
     session.close()
