@@ -5,14 +5,9 @@ metadata:
     service: location-service
   name: location-service
 spec:
-  ports:
-    - name: "5003"
-      port: 5003
-      targetPort: 5003
-      nodePort: 30003
   selector:
     service: location-service
-  type: NodePort
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
