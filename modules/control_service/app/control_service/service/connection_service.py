@@ -7,6 +7,11 @@ connection_stub = connection_pb2_grpc.ConnectionServiceStub(connection_channel)
 
 
 def get_connections(connection_request_data):
+    """
+    Returns all connections based on distance, date ranges.
+    The method sends gRPC request to connection-service
+    :return:
+    """
     connection_request_message = connection_pb2.ConnectionRequestMessage(
         person_id=connection_request_data['person_id'],
         start_date=connection_request_data['start_date'],

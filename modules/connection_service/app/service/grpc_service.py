@@ -14,6 +14,9 @@ DATE_FORMAT = "%Y-%m-%d"
 
 class ConnectionServicer(ConnectionServiceServicer):
     def FindConnectionList(self, request, context):
+        """
+        Find all connections based on distance and date ranges.
+        """
         request_data = {
             "person_id": request.person_id,
             "start_date": datetime.strptime(request.start_date, DATE_FORMAT),

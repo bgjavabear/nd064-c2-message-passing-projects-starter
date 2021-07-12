@@ -41,6 +41,9 @@ def find_all(person_id, start_date, end_date):
 
 
 def find_all_by_person_location_data(person_location_data):
+    """
+    Returns all locations based on distance and date range
+    """
     session = Session(engine)
     locations = session.execute(FIND_PEOPLE_NEARBY_QUERY, person_location_data)
     session.close()

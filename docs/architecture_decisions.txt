@@ -18,8 +18,6 @@ We expect locations are created frequently. There can be multiple locations for 
 That's why I am using kafka. Location events will be stored into kafka broker and location_service will be retrieving
 data from it and store into the database.
 
-
-
 3) connection_service
 connection service is responsible for the algorithm of finding people that you may find intreresting.
 
@@ -28,3 +26,38 @@ I chose grpc communication because the number of people returned may be huge.
 4) control_service
 control_service is basically service for internal usage that allow us to publish messages to kafka, to gRPC servers, etc
 It is used for debugging or demonstration purposes only.
+
+_______________________________________________________________________
+"Your supervisor wants to be able to launch this project in 2 weeks with a limited budget."
+
+The code is nicely separated.
+
+You can have one person per each microservice + QA team.
+
+you can work on location-service, connection-service, person-service independently. They do not depend on each other.
+The only dependency they have is the database that populated with test data to test your code on.
+
+Even to work on control-service you do not need all other microservices be ready.
+
+connection-service and person-service use gRPC. You already have protobuf messages. You know what kind of response you
+will receive when the microservices will be ready. And the microservices know what kind of request they receive.
+
+location-service fetches messages from kafka. So working on control-service, you just need to make sure that you
+are able to publish messages to kafka.
+
+So each team does not have to wait for each other.
+
+All this job could be done in a week without overtiming and last week you can spend on writing unit tests and perform
+integration testing.
+
+_______________________________________________________________________
+"Please provide how your architecture can be scaled when large volumes of location data being ingested."
+
+You could increase number of partitions and nodes for kafka.
+You do not have to track the order of locations, so it does not matter in what order messages are written to kafka partitions.
+
+Because location-service is extremely simple. You can increase number of pods in case of 1 server is not enough.
+
+Finally speaking of writing to database. The simplest thing you can do is to increase RAM, space, etc.
+
+But ideally you would like to implement noSQL database because of the horizontal scaling.

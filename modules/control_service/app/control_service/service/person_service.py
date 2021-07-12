@@ -7,18 +7,30 @@ person_stub = person_pb2_grpc.PersonServiceStub(person_channel)
 
 
 def get_person_by_id(person_id):
+    """
+    Returns a person with specified id.
+    The method sends gRPC request to person-service
+    """
     person_request_message = person_pb2.PersonRequestMessage(id=person_id)
     person = person_stub.Retrieve(person_request_message)
     return person
 
 
 def get_all():
+    """
+    Returns all persons.
+    The method sends gRPC request to person-service
+    """
     person_request_message = person_pb2.PersonRequestMessage()
     persons = person_stub.RetrieveAll(person_request_message)
     return persons
 
 
 def create(person_data):
+    """
+    Creates a new person
+    The method sends gRPC request to person-service
+    """
     person_message = person_pb2.PersonMessage(
         first_name=person_data['first_name'],
         last_name=person_data['last_name'],

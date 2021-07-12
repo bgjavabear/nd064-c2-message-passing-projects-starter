@@ -10,6 +10,9 @@ engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 
 
 def create(location):
+    """
+    creates and inserts a new location into the database
+    """
     session = Session(engine)
     new_location = Location()
     new_location.person_id = location["person_id"]

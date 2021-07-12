@@ -11,6 +11,9 @@ engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 
 
 def create(person):
+    """
+    Create a new person and inserts into the database
+    """
     session = Session(engine)
     new_person = Person()
     new_person.first_name = person["first_name"]
@@ -30,6 +33,9 @@ def create(person):
 
 
 def find_by_id(person_id):
+    """
+    Returns a person with the specified id
+    """
     session = Session(engine)
     person = session.query(Person).get(person_id)
     session.close()
@@ -37,6 +43,9 @@ def find_by_id(person_id):
 
 
 def find_all():
+    """
+    Returns all persons
+    """
     session = Session(engine)
     persons = session.query(Person).all()
     session.close()

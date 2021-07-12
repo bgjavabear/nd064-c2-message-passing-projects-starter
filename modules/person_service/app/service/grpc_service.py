@@ -5,6 +5,10 @@ from app.repository.person_repository import create, find_by_id, find_all
 
 class PersonServicer(PersonServiceServicer):
     def Create(self, request, context):
+        """
+        The implementation of gRPC method Create.
+        Inserts a new person into the database and returns it as proto message
+        """
         person = {
             "first_name": request.first_name,
             "last_name": request.last_name,
@@ -19,6 +23,10 @@ class PersonServicer(PersonServiceServicer):
         )
 
     def Retrieve(self, request, context):
+        """
+        The implementation of gRPC method Retrieve.
+        Returns the person with the specified id as proto message
+        """
         person_id = request.id
         person = find_by_id(person_id)
         return PersonMessage(
@@ -29,6 +37,10 @@ class PersonServicer(PersonServiceServicer):
         )
 
     def RetrieveAll(self, request, context):
+        """
+        The implementation of gRPC method RetrieveAll.
+        Returns all persons as proto messages
+        """
         persons = find_all()
         person_messages = []
         for person in persons:

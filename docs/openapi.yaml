@@ -1,0 +1,185 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/agva/control-service/1.0.0
+  - description: UdaConnect API
+    url: http://localhost:30001/api
+info:
+  description: Provides API for UdaConnect application
+  version: "1.0.0"
+  title: UdaConnect API
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /persons/{personId}:
+    get:
+      summary: return person by id
+      operationId: getPersonById
+      description: |
+        Returns person by id
+      parameters:
+        - in: path
+          name: personId
+          schema:
+            type: integer
+          required: true
+          description: Numeric id of the person to get
+      responses:
+        '200':
+          description: person by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonSchema'
+  /persons:
+    get:
+      summary: returns all persons
+      operationId: getAllPersons
+      description: |
+        Returns all persons
+      responses:
+        '200':
+          description: all persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonSchema'
+    post:
+      summary: creates a new persons
+      operationId: createPerson
+      description: Adds a person to the system
+      responses:
+        '200':
+          description: created person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonSchema'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonSchema'
+        description: Person to add
+  /locations:
+    post:
+      summary: create a new location
+      operationId: createLocation
+      description: |
+        Create a new location
+      responses:
+        '200':
+          description: created location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationSchema'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationSchema'
+        description: Location to add
+  /persons/{personId}/connection:
+    get:
+      summary:  returns all connections
+      operationId: getConnection
+      description: |
+        returns all connections that match criteria for specified person
+      parameters:
+        - in: path
+          name: personId
+          schema:
+            type: integer
+          required: true
+          description: Numeric id of the person to get
+        - in: query
+          name: start_date
+          description: start date
+          schema:
+            type: string
+            format: date-time
+            example: '2016-08-29T09:12:33.001Z'
+        - in: query
+          name: end_date
+          description: end date
+          schema:
+            type: string
+            format: date-time
+            example: '2016-08-29T09:12:33.001Z'
+        - in: query
+          name: distance
+          description: distance
+          schema:
+            type: string
+            format: integer
+      responses:
+        '200':
+          description: connections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectionSchema'
+components:
+  schemas:
+    LocationSchema:
+      type: object
+      required:
+        - id
+        - person_id
+        - longitude
+        - latitude
+        - creation_time
+      properties:
+        id:
+          type: integer
+          example: 23
+        person_id:
+          type: integer
+          example: 5
+        longitude:
+          type: string
+          example: '-90.0364'
+        latitude:
+          type: string
+          example: 69.8951
+        creation_time:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+    PersonSchema:
+      type: object
+      required:
+        - id
+        - first_name
+        - last_name
+        - company_name
+      properties:
+        id:
+          type: integer
+          example: 5
+        first_name:
+          type: string
+          example: Mark
+        last_name:
+          type: string
+          example: Brandson
+        company_name:
+          type: string
+          example: Google
+    ConnectionSchema:
+      type: object
+      required:
+        - location
+        - person
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationSchema'
+        person:
+          $ref: '#/components/schemas/PersonSchema'
